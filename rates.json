@@ -1,0 +1,17 @@
+{
+    "info": {
+        "default_from": "USD"
+    },
+    "rates": {
+        "EUR": 1,
+        "USD": 1.13,
+        "RSD": 117.5,
+        "GBP": 0.85
+    },
+    "symbols": {
+        "EUR": "€",
+        "USD": "$",
+        "RSD": "дин.",
+        "GBP": "£"
+    }
+}
