@@ -1,0 +1,19 @@
+{
+    "title": "Reactive Currency Converter",
+    "cardTitle": "Converter",
+    "labels": {
+        "amount": "Amount",
+        "currency": "Currency",
+        "footer": "Live rates updated instantly."
+    },
+    "themes": [
+        "forest",
+        "cupcake",
+        "dark",
+        "light",
+        "cyberpunk"
+    ],
+    "defaults": {
+        "amount": 1
+    }
+}
