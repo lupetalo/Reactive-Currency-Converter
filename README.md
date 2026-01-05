@@ -5,7 +5,7 @@ A lightweight, real-time currency converter web application built with [Alpine.j
 ## Features
 
 - **Reactive Conversion**: Instantly converts amounts as you type or select currencies.
-- **Theming**: Includes 5 built-in themes (Forest, Cupcake, Dark, Light, Cyberpunk).
+- **Theming**: Includes 5 built-in themes. **Dark** is the default, with options for Forest, Cupcake, Light, and Cyberpunk.
 - **Responsive Design**: Mobile-friendly interface.
 - **Local Dependencies**: All assets (CSS, JS) are hosted locally within the project for privacy and reliability. No external CDN requests are made during runtime.
 
@@ -37,6 +37,10 @@ A lightweight, real-time currency converter web application built with [Alpine.j
 
 - **Localized Dependencies**: Switched from CDNs to local assets (`/assets`) for DaisyUI, Tailwind, Theme Change, and Alpine.js. This ensures the app can run without reaching out to third-party servers.
 - **Modern Stack**: Migrated from AngularJS to Alpine.js for a lighter, more modern "no-build" reactive experience.
+- **UI Polish**:
+  - Defaulted to **Dark Mode**.
+  - Improved footer with proper credit labels and blended styling.
+  - Refined input elements for better consistency.
 
 ## Tech Stack
 

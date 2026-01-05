@@ -16,7 +16,7 @@ function currencyConverter() {
             },
             themes: []
         },
-        currentTheme: 'forest',
+        currentTheme: 'dark',
 
         async init() {
             // Load Config

@@ -12,7 +12,7 @@ The project relies on local assets stored in the `assets/` directory. No build s
   - [Tailwind CSS](https://tailwindcss.com/) (Local script)
   - [DaisyUI](https://daisyui.com/) (Local component library)
 - **Utilities**: 
-  - [theme-change](https://github.com/saadeghi/theme-change) (Local theme switching)
+  - Custom alpine-based theme switcher (defaults to **Dark** theme)
 - **Data**: JSON (`rates.json`)
 
 ## File Structure

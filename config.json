@@ -7,9 +7,9 @@
         "thanks": "Thanks to:"
     },
     "themes": [
+        "dark",
         "forest",
         "cupcake",
-        "dark",
         "light",
         "cyberpunk"
     ],
