@@ -94,8 +94,6 @@
                         </div>
                     </template>
                 </div>
-
-                <p class="text-xs text-base-content/50 mt-4 text-center" x-text="config.labels.footer"></p>
             </div>
         </div>
     </main>
@@ -110,7 +108,7 @@
             </div>
             <div class="divider divider-horizontal mx-0"></div>
             <div class="flex items-center gap-4">
-                <span>Thanks to:</span>
+                <span x-text="config.labels.thanks"></span>
                 <div class="flex gap-3">
                     <template x-for="credit in config.footer.credits" :key="credit.name">
                         <a :href="credit.url" class="link link-hover flex items-center gap-1" target="_blank"

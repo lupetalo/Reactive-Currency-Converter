@@ -54,6 +54,12 @@ The application logic is contained within the `<script>` tag at the bottom of `i
 - Currency rates and symbols are defined in `rates.json`.
 - The `default_from` key in `rates.json` sets the initial base currency.
 
+### Automation
+- `update_rates.py`: A Python script to fetch the latest rates from the National Bank of Serbia.
+  - Run with `python3 update_rates.py`.
+  - It reads `rates.json` to identify which currencies to update.
+  - If you add a new currency to `rates.json`, this script will automatically attempt to fetch its rate next time it runs (provided the currency code exists on the NBS page).
+
 ## Deployment
 This is a static site. To deploy:
 1. Ensure `index.html` and `rates.json` are in the deployment directory.

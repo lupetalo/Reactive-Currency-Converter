@@ -4,7 +4,7 @@
     "labels": {
         "amount": "Amount",
         "currency": "Currency",
-        "footer": "Live rates updated instantly."
+        "thanks": "Thanks to:"
     },
     "themes": [
         "forest",

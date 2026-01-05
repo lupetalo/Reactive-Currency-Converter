@@ -44,3 +44,13 @@ A lightweight, real-time currency converter web application built with [Alpine.j
 - **Alpine.js 3.x**
 - **Tailwind CSS**
 - **DaisyUI**
+
+## Data Updates
+
+The application uses `rates.json` for exchange rates. You can update this file automatically using the included Python script.
+
+**Usage:**
+```bash
+python3 update_rates.py
+```
+This script fetches the latest middle exchange rates from the National Bank of Serbia website and updates `rates.json`. It dynamically detects all currencies currently defined in `rates.json` and attempts to fetch their latest rate.
