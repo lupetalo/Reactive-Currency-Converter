@@ -1,12 +1,12 @@
 # Testing Plan
 
-**Target URL**: [https://cc.lukapetrovic.com/](https://cc.lukapetrovic.com/)
+**Target URL**: ask user
 
 This document outlines the test cases to verify the full functionality of the Reactive Currency Converter. It will be updated as development progresses.
 
 ## Test Environment
 - **Browser**: Modern Chrome/Firefox/Safari
-- **URL**: `https://cc.lukapetrovic.com/`
+- **URL**: ask user
 
 ## Test Cases
 
@@ -51,7 +51,7 @@ This document outlines the test cases to verify the full functionality of the Re
 
 ### 4. UI & Theming
 - [ ] **TC4.1: Switch Theme**
-  - **Action**: Select a different theme (e.g., `Cyberpunk`).
+  - **Action**: Select a different theme (e.g., `Forest`).
   - **Expected**: 
     - Background colors and fonts should change immediately.
     - Selection should persist in `localStorage` (if reload is tested).
