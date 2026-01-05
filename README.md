@@ -1,6 +1,6 @@
 # Reactive Currency Converter
 
-A lightweight, real-time currency converter web application built with [AngularJS](https://angularjs.org/) and styled with [DaisyUI](https://daisyui.com/) + [Tailwind CSS](https://tailwindcss.com/).
+A lightweight, real-time currency converter web application built with [Alpine.js](https://alpinejs.dev/) and styled with [DaisyUI](https://daisyui.com/) + [Tailwind CSS](https://tailwindcss.com/).
 
 ## Features
 
@@ -35,11 +35,12 @@ A lightweight, real-time currency converter web application built with [AngularJ
 
 ## Recent Changes
 
-- **Localized Dependencies**: Switched from CDNs to local assets (`/assets`) for DaisyUI, Tailwind, Theme Change, and AngularJS. This ensures the app can run without reaching out to third-party servers.
+- **Localized Dependencies**: Switched from CDNs to local assets (`/assets`) for DaisyUI, Tailwind, Theme Change, and Alpine.js. This ensures the app can run without reaching out to third-party servers.
+- **Modern Stack**: Migrated from AngularJS to Alpine.js for a lighter, more modern "no-build" reactive experience.
 
 ## Tech Stack
 
 - **HTML5**
-- **AngularJS 1.8.2**
+- **Alpine.js 3.x**
 - **Tailwind CSS**
 - **DaisyUI**

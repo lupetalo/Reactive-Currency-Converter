@@ -7,7 +7,7 @@ This project is a reactive currency converter web application. It is a lightweig
 The project relies on local assets stored in the `assets/` directory. No build step is required.
 
 - **Core**: HTML5
-- **Logic**: [AngularJS 1.8.2](https://angularjs.org/) (Local)
+- **Logic**: [Alpine.js](https://alpinejs.dev/) (Local)
 - **Styling**: 
   - [Tailwind CSS](https://tailwindcss.com/) (Local script)
   - [DaisyUI](https://daisyui.com/) (Local component library)
@@ -45,10 +45,10 @@ The project relies on local assets stored in the `assets/` directory. No build s
 3. Navigate to `http://localhost:8000` (or the port specified by your server).
 
 ### Javascript Logic
-The application logic is contained within the `<script>` tag at the bottom of `index.html` inside the `CurrencyController`.
-- **`$scope.rates`**: Stores currency rates.
-- **`$scope.amount`**: Stores the amount input.
-- **`$scope.convert()`**: Function to calculate conversion.
+The application logic is contained within the `<script>` tag at the bottom of `index.html` using [Alpine.js](https://alpinejs.dev/).
+- **`x-data="currencyConverter()"`**: Initialize the component state.
+- **`init()`**: Fetches rates from `rates.json`.
+- **`convert()`**: Function to calculate conversion.
 
 ### Data Management
 - Currency rates and symbols are defined in `rates.json`.

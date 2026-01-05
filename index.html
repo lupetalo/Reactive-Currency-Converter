@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="currencyApp" data-theme="forest">
+<html lang="en" data-theme="forest">
 
 <head>
     <meta charset="UTF-8">
@@ -11,11 +11,11 @@
     <script src="assets/tailwindcss.js"></script>
     <!-- Theme Change -->
     <script src="assets/theme-change.js"></script>
-    <!-- AngularJS 1.8 -->
-    <script src="assets/angular.min.js"></script>
+    <!-- Alpine.js -->
+    <script src="assets/alpine.js" defer></script>
 </head>
 
-<body class="bg-base-200 min-h-screen flex items-center justify-center font-sans" ng-controller="CurrencyController">
+<body class="bg-base-200 min-h-screen flex items-center justify-center font-sans" x-data="currencyConverter()">
 
     <div class="card w-96 bg-base-100 shadow-xl">
         <div class="card-body">
@@ -40,8 +40,8 @@
                     </label>
                     <div class="relative">
                         <span class="absolute left-3 top-2.5 font-bold text-base-content/50 z-10"
-                            ng-bind="getSymbol(fromCurrency)"></span>
-                        <input type="number" step="any" ng-model="amount" ng-change="updateConversions()"
+                            x-text="getSymbol(fromCurrency)"></span>
+                        <input type="number" step="any" x-model="amount"
                             class="input input-bordered w-full pl-8 font-bold" placeholder="1.00">
                     </div>
                 </div>
@@ -51,8 +51,10 @@
                     <label class="label pt-0 pb-1">
                         <span class="label-text text-xs">Currency</span>
                     </label>
-                    <select ng-model="fromCurrency" ng-options="code as code for (code, rate) in rates"
-                        ng-change="updateConversions()" class="select select-bordered w-full px-4">
+                    <select x-model="fromCurrency" class="select select-bordered w-full px-4">
+                        <template x-for="(rate, code) in rates" :key="code">
+                            <option :value="code" x-text="code"></option>
+                        </template>
                     </select>
                 </div>
             </div>
@@ -62,16 +64,17 @@
                 <table class="table table-zebra w-full">
                     <!-- Removed Header -->
                     <tbody>
-                        <tr ng-repeat="(code, rate) in rates" ng-if="code !== fromCurrency"
-                            class="hover border-base-200">
-                            <td class="font-bold py-3 text-base-content/80">
-                                {{ code }}
-                                <span class="text-xs font-normal opacity-70 ml-1">{{ getSymbol(code) }}</span>
-                            </td>
-                            <td class="text-right py-3 text-lg font-sans font-medium text-accent">
-                                {{ convert(rate) }}
-                            </td>
-                        </tr>
+                        <template x-for="(rate, code) in rates" :key="code">
+                            <tr x-show="code !== fromCurrency" class="hover border-base-200">
+                                <td class="font-bold py-3 text-base-content/80">
+                                    <span x-text="code"></span>
+                                    <span class="text-xs font-normal opacity-70 ml-1" x-text="getSymbol(code)"></span>
+                                </td>
+                                <td class="text-right py-3 text-lg font-sans font-medium text-accent">
+                                    <span x-text="convert(rate)"></span>
+                                </td>
+                            </tr>
+                        </template>
                     </tbody>
                 </table>
             </div>
@@ -81,64 +84,55 @@
     </div>
 
     <script>
-        var app = angular.module('currencyApp', []);
+        function currencyConverter() {
+            return {
+                amount: 1,
+                rates: {},
+                symbols: {},
+                fromCurrency: '',
 
-        app.controller('CurrencyController', function ($scope, $http) {
-            $scope.amount = 1;
-            $scope.rates = {};
-            $scope.symbols = {};
-            $scope.fromCurrency = '';
+                init() {
+                    fetch('rates.json')
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.rates) {
+                                this.rates = data.rates;
+                                this.symbols = data.symbols || {};
 
-            // Fetch rates on load
-            $http.get('rates.json').then(function (response) {
-                if (response.data.rates) {
-                    $scope.rates = response.data.rates;
-                    $scope.symbols = response.data.symbols || {};
+                                if (data.info && data.info.default_from && this.rates[data.info.default_from]) {
+                                    this.fromCurrency = data.info.default_from;
+                                } else {
+                                    this.fromCurrency = Object.keys(this.rates)[0] || 'USD';
+                                }
+                            } else {
+                                // Fallback for simple structure if needed, though rates.json structure is known
+                                this.rates = data;
+                                this.fromCurrency = Object.keys(this.rates)[0] || 'USD';
+                            }
+                        })
+                        .catch(error => console.error('Error fetching rates:', error));
+                },
 
-                    if (response.data.info && response.data.info.default_from && $scope.rates[response.data.info.default_from]) {
-                        $scope.fromCurrency = response.data.info.default_from;
+                convert(targetRate) {
+                    if (!this.amount || !this.fromCurrency || !this.rates[this.fromCurrency]) {
+                        return '0.0000';
                     }
-                } else {
-                    $scope.rates = response.data;
+
+                    const fromRate = this.rates[this.fromCurrency];
+                    const baseAmount = this.amount / fromRate;
+                    const convertedAmount = baseAmount * targetRate;
+
+                    return convertedAmount.toLocaleString(undefined, {
+                        minimumFractionDigits: 4,
+                        maximumFractionDigits: 4
+                    });
+                },
+
+                getSymbol(code) {
+                    return (this.symbols && this.symbols[code]) ? this.symbols[code] : '';
                 }
-
-                if (!$scope.fromCurrency && Object.keys($scope.rates).length > 0) {
-                    if ($scope.rates['USD']) {
-                        $scope.fromCurrency = 'USD';
-                    } else {
-                        $scope.fromCurrency = Object.keys($scope.rates)[0];
-                    }
-                }
-            }, function (error) {
-                console.error('Error fetching rates:', error);
-            });
-
-            $scope.convert = function (targetRate) {
-                if (!$scope.amount || !$scope.fromCurrency || !$scope.rates || !$scope.rates[$scope.fromCurrency]) {
-                    return '0.0000';
-                }
-
-                var fromRate = $scope.rates[$scope.fromCurrency];
-                var baseAmount = $scope.amount / fromRate;
-                var convertedAmount = baseAmount * targetRate;
-
-                // Format using browser locale
-                return convertedAmount.toLocaleString(undefined, {
-                    minimumFractionDigits: 4,
-                    maximumFractionDigits: 4
-                });
-            };
-
-            $scope.getSymbol = function (code) {
-                if ($scope.symbols && $scope.symbols[code]) {
-                    return $scope.symbols[code];
-                }
-                return ''; // Default to no symbol or code itself
-            };
-
-            $scope.updateConversions = function () {
-            };
-        });
+            }
+        }
     </script>
 </body>
 
