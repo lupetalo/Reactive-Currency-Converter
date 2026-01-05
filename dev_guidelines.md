@@ -4,21 +4,22 @@
 This project is a reactive currency converter web application. It is a lightweight, single-page application built with AngularJS and styled with Tailwind CSS and DaisyUI.
 
 ## Technology Stack
-The project relies on Content Delivery Networks (CDNs) for its dependencies. No build step is required.
+The project relies on local assets stored in the `assets/` directory. No build step is required.
 
 - **Core**: HTML5
-- **Logic**: [AngularJS 1.8.2](https://angularjs.org/)
+- **Logic**: [AngularJS 1.8.2](https://angularjs.org/) (Local)
 - **Styling**: 
-  - [Tailwind CSS](https://tailwindcss.com/) (via script)
-  - [DaisyUI](https://daisyui.com/) (Component library)
+  - [Tailwind CSS](https://tailwindcss.com/) (Local script)
+  - [DaisyUI](https://daisyui.com/) (Local component library)
 - **Utilities**: 
-  - [theme-change](https://github.com/saadeghi/theme-change) (Theme switching)
+  - [theme-change](https://github.com/saadeghi/theme-change) (Local theme switching)
 - **Data**: JSON (`rates.json`)
 
 ## File Structure
 
 ```
 /
+├── assets/         # Local dependencies (CSS, JS)
 ├── index.html      # Main application file (HTML + JS Controller)
 ├── rates.json      # Configuration file for currency rates and symbols
 └── ...
