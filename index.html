@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reactive Currency Converter</title>
+    <link rel="icon" type="image/png" href="assets/favicon.png">
     <!-- DaisyUI -->
     <link href="assets/daisyui.css" rel="stylesheet" type="text/css" />
     <!-- Tailwind CSS -->
@@ -30,7 +31,8 @@
                             <span x-text="currentTheme.charAt(0).toUpperCase() + currentTheme.slice(1)"></span>
                             <span>▼</span>
                         </div>
-                        <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+                        <ul tabindex="0"
+                            class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 max-h-96 overflow-y-auto block">
                             <template x-for="theme in config.themes" :key="theme">
                                 <li><a @click="currentTheme = theme; document.activeElement.blur()"
                                         x-text="theme.charAt(0).toUpperCase() + theme.slice(1)"
